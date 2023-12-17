@@ -1,0 +1,104 @@
+<!doctype html>
+<html> 
+
+{% include "part_header.html" %}
+
+<body>
+<!-- Main container -->
+<div class="page-container">
+
+{% include "part_nav.html" %}
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc " id="bloc-2">
+    <div class="container bloc-lg">
+        <div class="row">
+            <div class="col-sm-12">
+
+
+
+{% if wait %}  
+<h3 class="mg-md" id="analysis">
+Analyzing in Progress
+</h3>
+
+<div class="bt_load">
+<img src="{{ url_for('static', filename='img/rotate.gif') }}" alt="Analyzing in Progress">
+</div>
+
+<script type="text/javascript">
+
+var query_url = "/api/connection/{{uuid}}/{{index}}";
+
+</script>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/waitstatus.js') }}"></script>
+
+
+{% else %}            
+
+{% include "part_general.html" %}            
+
+{% if show_type == 'general_tcp' %}
+    
+    {% include "part_tcp.html" %}
+
+{% elif show_type == 'general_udp' %}
+
+    {% include "part_udp.html" %}
+
+{% elif show_type == 'iscsi' %}
+
+    {% include "part_iscsi.html" %}
+    {% include "part_tcp.html" %}
+                
+{% elif show_type == 'nfsv3' %}
+
+    {% include "part_nfsv3.html" %}
+    
+    {% if conn['type'] == 'TCP'%}
+        {% include "part_tcp.html" %}
+    {% else %}
+        {% include "part_udp.html" %}
+    {% endif %}
+
+{% elif show_type == 'nfsv4' %}
+
+    {% include "part_nfsv4.html" %}
+    
+    {% if conn['type'] == 'TCP'%}
+        {% include "part_tcp.html" %}
+    {% else %}
+        {% include "part_udp.html" %}
+    {% endif %}
+
+{% elif show_type == 'smb' %}
+
+    {% include "part_smb.html" %}
+    {% include "part_tcp.html" %}
+
+{% elif show_type == 'smb2' %}
+    
+    {% include "part_smb2.html" %}
+    {% include "part_tcp.html" %}
+
+{% else %}
+    <!-- Nothing -->
+{% endif %}
+           
+{% endif %}                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- bloc-2 END -->
+
+{% include "part_footer.html" %}
+
+</div>
+<!-- Main container END -->
+
+</body>
+</html>
+
