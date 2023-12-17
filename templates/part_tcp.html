@@ -1,0 +1,160 @@
+<h3 class="mg-md">
+TCP Retrans
+</h3>
+
+<p>
+
+{% if tcp['retrans']['tf'] == "0" %}
+
+No retransmissions packets found among the 
+{{ tcp['tframes'] }}
+packets.
+
+{% else %}
+
+    {% if tcp['retrans']['trate_f'] > 0.001 %}
+        {% set show_class = "warn-high" %}
+    {% elif tcp['retrans']['trate_f'] >= 0.0001 %}
+        {% set show_class = "warn-medium" %}
+    {% else %}
+        {% set show_class = "" %}
+    {% endif %}
+
+
+
+Among the 
+{{ tcp['tframes'] }}
+packets, 
+<span class="{{show_class}}">
+there were 
+<strong>{{ tcp['retrans']['tf'] }}</strong>
+retransmissions with rate 
+<strong>{{ tcp['retrans']['trate_s'] }}%</strong>
+</span>
+.
+<strong>{{ tcp['retrans']['sf'] }}</strong>
+of them were retransmitted from 
+<strong>{{ conn['src_ip'] }}</strong>
+to 
+<strong>{{ conn['dest_ip'] }}</strong>
+, and
+<strong>{{ tcp['retrans']['df'] }}</strong>
+of them were retransmitted from 
+<strong>{{ conn['dest_ip'] }}</strong>
+to
+<strong>{{ conn['src_ip'] }}</strong>
+. 
+</br>
+</br>
+The Retransmission rate over 0.1% indicates a network congestion, and 0.01% ~ 0.1% is questionable. If this retransmission rate is considered as high for your product, please work with network team to figure out the cause. Limiting the TCP window or extending the bandwidth could reduce retransmission.
+
+
+
+{% endif %}
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+{% if tcp['retrans']['tf'] != "0" %}
+    <h3 class="mg-md">
+    TCP SACK
+    </h3>
+
+    {% if tcp['sack']['f'] == "0" %}
+
+    <p>
+    SACK was not enabled in this TCP session, please check both sides to enable SACK. Enabling SACK could reduce the impact of retransmission.
+    </p>
+    
+    {% else %}
+    
+    SACK was enabled.
+    
+    {% endif %}
+
+    <div class="divider-h">
+    <span class="divider"></span>
+    </div>
+
+    
+{% endif %}
+
+<h3 class="mg-md">
+TCP Zero Window
+</h3>
+
+<p>
+{% if tcp['zerowin']['tf'] == '0' %}
+There was no TCP Zero Window among the
+{{ tcp['tframes'] }}
+packets.
+{% else %}
+Among the
+{{ tcp['tframes'] }}
+packets, there were
+<strong>{{ tcp['zerowin']['tf'] }}</strong>
+indicating TCP Zero Window.
+<strong>{{ tcp['zerowin']['sf'] }}</strong>
+of them were from 
+<strong>{{ conn['src_ip'] }}</strong>
+, and
+<strong>{{ tcp['zerowin']['df'] }}</strong>
+of them were from
+<strong>{{ conn['dest_ip'] }}</strong>
+. 
+</br>
+</br>
+The host which indicates high rate of TCP Zero Window may be overloaded.
+
+{% endif %}
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+<h3 class="mg-md">
+Delayed ACK
+</h3>
+<p>
+{% if tcp['delayack']['sf'] == '0' and tcp['delayack']['df'] == '0' %}
+
+There were no Delayed ACKs among the 
+{{ tcp['delayack']['tf'] }}
+pure ACKs.
+
+ {% else %}
+ 
+    {% if tcp['delayack']['delayack_factor'] >= 0.2 %}
+        {% set show_class = "warn-high" %}
+    {% elif tcp['delayack']['delayack_factor'] >= 0.1 %}
+        {% set show_class = "warn-medium" %}
+    {% else %}
+        {% set show_class = "" %}
+    {% endif %}
+
+Among the 
+{{ tcp['delayack']['tf'] }}
+pure ACKs, 
+<span class="{{show_class}}">
+<strong>{{ tcp['delayack']['sf'] }}</strong>
+ACKs from 
+<strong>{{ conn['src_ip'] }}</strong>
+and
+<strong>{{ tcp['delayack']['df'] }}</strong>
+ACKs from
+<strong>{{ conn['dest_ip'] }}</strong>
+might be Delayed ACKs. 
+</span>
+</br>
+</br>
+Each Delayed ACK takes about 0.2 second, which means {{ tcp['delayack']['delayack_waste'] }} seconds have been wasted in this connection. You may disable Delayed ACK if the impact is high.
+
+{% endif %}
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

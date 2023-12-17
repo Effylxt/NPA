@@ -1,0 +1,59 @@
+<h3 class="mg-md">
+NFSv3 SRT
+</h3>
+
+<table class="table table-striped">
+
+<thead>  
+<tr>
+
+    <th>Procedure</th>
+    <th>Calls</th>
+    <th>Min SRT (s)</th>
+    <th>Max SRT (s)</th>
+    <th>Avg SRT (s)</th>
+    <th>Total (s)</th>
+
+</tr>  
+</thead>  
+
+<tbody>
+{% for line in nfsv3['srt'] %}
+<tr>
+    <td>{{ line['proc'] }}</td>
+    <td>{{ line['calls'] }}</td>
+    <td>{{ line['minSRT'] }}</td>
+    <td>{{ line['maxSRT'] }}</td>
+    <td>{{ line['avgSRT'] }}</td>
+    <td>{{ line['total'] }}</td>
+    
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+<h3 class="mg-md">
+NFSv3 IO Size
+</h3>
+<p>
+There were 
+{{nfsv3['read']['f']}}
+read operations with average size 
+{{nfsv3['read']['avg']}}
+bytes and 
+{{nfsv3['write']['f']}}
+write operations with average size
+{{nfsv3['write']['avg']}}
+bytes.
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

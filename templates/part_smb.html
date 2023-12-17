@@ -1,0 +1,55 @@
+<h3 class="mg-md">
+SMB SRT
+</h3>
+
+{% for t in smb['srt'] %}
+<table class="table table-striped">
+<thead>
+
+<tr>
+    <th>{{t.cat}}</th>
+    <th>Calls    </th>
+    <th>Min SRT (s)</th>
+    <th>Max SRT (s)</th>
+    <th>Avg SRT (s)</th>
+</tr>  
+</thead>  
+
+<tbody>
+{% for v in t.list%}
+<tr>
+    <td>{{ v.proc }}</td>
+    <td>{{ v.calls }}</td>
+    <td>{{ v.minSRT }}</td>
+    <td>{{ v.maxSRT }}</td>
+    <td>{{ v.avgSRT }}</td>
+ </tr>   
+{% endfor %}
+</tbody>
+</table>
+</br>
+{% endfor %}
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+
+<h3 class="mg-md">
+SMB IO Size
+</h3>
+<p>
+There were 
+{{smb['read']['f']}}
+read operations with average size 
+{{smb['read']['avg']}}
+bytes and 
+{{smb['write']['f']}}
+write operations with average size
+{{smb['write']['avg']}}
+bytes.
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

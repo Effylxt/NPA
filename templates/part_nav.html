@@ -1,0 +1,25 @@
+<!-- Navigation Bloc -->
+<div class="bloc l-bloc bgc-2 bg-tile-d-bg bg-repeat" id="nav-bloc">
+    <div class="container bloc-sm">
+        <nav class="navbar row">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/EMC-no-tag_blue_RGB-150dpi.png') }}" width="100" alt='' />
+                </a>
+                <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-1">
+                <ul class="site-navigation nav">
+                    <li>
+                        {% if not isIndex %}
+                            <a href="{{ url_for('index') }}" class="pull-left">Network Performance Analyzer</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navigation Bloc END -->

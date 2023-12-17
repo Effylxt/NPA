@@ -1,0 +1,64 @@
+<h3 class="mg-md">
+NFSv4 SRT
+</h3>
+
+<table class="table table-striped">
+
+<thead>  
+<tr>
+    <th>Procedure</th>
+    <th>Calls</th>
+    <th>Min SRT (s)</th>
+    <th>Max SRT (s)</th>
+    <th>Avg SRT (s)</th>
+    <th>Total (s)</th>
+</tr>    
+</thead>  
+<tbody>
+<tr>
+    <td>Read</td>
+    <td>{{ nfsv4['readsrt']['calls'] }}</td>
+    <td>{{ nfsv4['readsrt']['minSRT'] }}</td>
+    <td>{{ nfsv4['readsrt']['maxSRT'] }}</td>
+    <td>{{ nfsv4['readsrt']['avgSRT'] }}</td>
+    <td>{{ nfsv4['readsrt']['total'] }}</td>
+</tr>
+
+<tr>
+    <td>Write</td>
+    <td>{{ nfsv4['writesrt']['calls'] }}</td>
+    <td>{{ nfsv4['writesrt']['minSRT'] }}</td>
+    <td>{{ nfsv4['writesrt']['maxSRT'] }}</td>
+    <td>{{ nfsv4['writesrt']['avgSRT'] }}</td>
+    <td>{{ nfsv4['writesrt']['total'] }}</td>
+    
+</tr>
+
+</tbody>
+</table>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+
+<h3 class="mg-md">
+NFSv4 IO Size
+</h3>
+
+<p>
+There were 
+{{nfsv4['read']['f']}}
+read operations with average size 
+{{nfsv4['read']['avg']}}
+bytes
+and 
+{{nfsv4['write']['f']}}
+write operations with average size
+{{nfsv4['write']['avg']}}
+bytes.
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

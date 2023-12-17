@@ -1,0 +1,53 @@
+<h3 class="mg-md">
+iSCSI SRT
+</h3>
+
+<table class="table table-striped">
+<thead>
+
+<tr>
+    <th>Procedure</th>
+    <th>Calls</th>
+    <th>Min SRT (s)</th>
+    <th>Max SRT (s)</th>
+    <th>Avg SRT (s)</th>
+</tr>  
+</thead>  
+<tbody>
+{% for item in iscsi['srt'] %}
+<tr>
+  
+    <td>{{ item.proc }}</td>
+    <td>{{ item.calls }}</td>
+    <td>{{ item.minSRT }}</td>
+    <td>{{ item.maxSRT }}</td>
+    <td>{{ item.avgSRT }}</td>
+    
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+<h3 class="mg-md">
+iSCSI IO Size
+</h3>
+
+<p>
+There were
+{{ iscsi['read']['frames'] }}
+read operations with average size
+{{ iscsi['read']['avg'] }}
+bytes, and 
+{{ iscsi['write']['frames'] }}
+write operations with average size 
+{{ iscsi['write']['avg'] }}
+bytes.
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

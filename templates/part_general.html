@@ -1,0 +1,84 @@
+<h3 class="mg-md">
+Summary
+</h3>
+
+<table width="50%" class="table-condensed">
+<tbody>
+<tr>
+    <td>Number of packets:</td>
+    <td>{{ general['capinfos']['Number of packets'] }} </td>
+</tr>    
+<tr>
+    <td>File size:</td>
+    <td>{{ general['capinfos']['File size'] }} </td>
+</tr>    
+<tr>
+    <td>Capture duration:</td>
+    <td>{{ general['capinfos']['Capture duration'] }} </td>
+</tr>    
+<tr>
+    <td>Data byte rate:</td>
+    <td>{{ general['capinfos']['Data byte rate'] }} </td>
+</tr>    
+<tr>
+    <td>Average packet size:</td>
+    <td>{{ general['capinfos']['Average packet size'] }} </td>
+</tr>    
+<tr>
+    <td>Connection:</td>
+    <td>{{ conn['src_ip'] }}:{{ conn['src_port'] }} 
+    &lt;-&gt;
+    {{ conn['dest_ip'] }}:{{ conn['dest_port'] }}</td>
+</tr>    
+
+
+
+</tbody>
+</table>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+
+{% if general['flowinfo'] %}
+
+<h3 class="mg-md">
+Flow Analysis
+</h3>
+
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/jquery.jqplot.min.css') }}" />
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.jqplot.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.barRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.pieRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.categoryAxisRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.pointLabels.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.canvasTextRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.canvasAxisLabelRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/jqplot.canvasAxisTickRenderer.min.js') }}"></script>
+
+<script type="text/javascript">
+
+var ds = "{{ url_for('generate_data', uuid=uuid, index=index) }}";
+
+</script>
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/load.bar.chart.js') }}"></script>
+
+
+<div id="flowchart" width="80%">
+</div>
+
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+
+
+{% endif %}
+
+

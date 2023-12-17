@@ -1,0 +1,36 @@
+<h3 class="mg-md">
+UDP
+</h3>
+
+<p>
+This is a UDP based connection. You may switch to TCP to get better flow control.
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>
+
+<h3 class="mg-md">
+Fragment Loss Check
+</h3>
+
+<p>
+{% if udp['ttlexceeded']['f'] == '0' %}
+There was no fragment loss found among the
+<strong>{{ conn['tframes'] }}</strong>
+packets.
+
+{% else %}
+
+Among the
+<strong>{{ conn['tframes'] }}</strong>
+packets, there were
+<strong>{{udp['ttlexceeded']['f']}}</strong>
+fragment loss messages. This message indicates possible UDP packets loss.
+
+{% endif %}
+</p>
+
+<div class="divider-h">
+<span class="divider"></span>
+</div>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<script>
+if (!window.File || !window.FileList || !window.FileReader)
+{
+    window.location.href = "{{url_for('notice')}}";
+}
+</script>
+
+{% include "part_header.html" %}
+
+<body>
+<!-- Main container -->
+<div class="page-container">
+
+{% include "part_nav.html" %}
+
+
+<!-- bloc-1 -->
+<div class="bloc l-bloc " id="bloc-1">
+    <div class="container bloc-lg">
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+
+		<div style="text-align:center;"> 
+		<img src="{{ url_for('static', filename='img/main.jpg') }}" /> </div>
+
+                    <br/>
+                    <h4 class="mg-md">
+                        Drag Network Trace file into the box below and click Upload!
+                    </h4>
+                    
+                    
+                    <div class="form-group">
+                        <div class="form-control" id="dropbox">
+                        </div>
+                    </div>
+
+                    <fieldset id="progress" style="display: none">
+                        <legend>Upload in Progress</legend>
+                        
+                    <div class="progress-trough">
+                        <div id="progress-bar" class="progress-bar">0%</div>
+                    </div>
+                    </fieldset>
+                    
+                    <a href="#" id="upload-button" class="btn  btn-sq btn-d">Upload!</a>
+                    <br/>
+                    <br/>
+                </form>    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- bloc-1 END -->
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/uploadr.js') }}"></script>
+
+
+{% include "part_footer.html" %}
+
+</div>
+<!-- Main container END -->
+
+</body>
+</html>
+

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+{% include "part_header.html" %}
+
+<body>
+<!-- Main container -->
+<div class="page-container">
+
+{% include "part_nav.html" %}
+
+<!-- bloc-2 -->
+<div class="bloc l-bloc " id="bloc-2">
+    <div class="container bloc-lg">
+        <div class="row">
+            <div class="col-sm-12">
+
+{% if wait %}  
+<h3 class="mg-md" id="analysis">
+Analyzing in Progress
+</h3>
+
+<div class="bt_load">
+<img src="{{ url_for('static', filename='img/rotate.gif') }}" alt="Analyzing in Progress">
+</div>
+
+<script type="text/javascript">
+
+var query_url = "/api/capture/{{uuid}}";
+
+</script>
+
+
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/waitstatus.js') }}"></script>
+
+
+{% else %}            
+
+<h3 class="mg-md">
+Click the Connection Row to start Analysis
+</h3>
+
+
+<table class="table table-hover table-condensed">
+
+<thead>
+<tr>
+    <th>Index</th>
+    <th>Type</th>
+    <th>Address A</th>
+    <th>Address B</th>
+    <th>Packets <span class="nobr">A&lt;-B</span></th>
+    <th>Bytes <span class="nobr">A&lt;-B</span></th>
+    <th>Packets <span class="nobr">A-&gt;B</span></th>
+    <th>Bytes <span class="nobr">A-&gt;B</span></th>
+    <!--
+    <th>Total Packets</th>
+    <th>Total Bytes</th>
+    -->
+    <th>Relative Start (s)</th>
+    <th>Duration (s)</th>
+</tr>  
+</thead>  
+<tbody>
+{% for aconn in conns %}
+<tr id="rindex{{ loop.index0 }}" class="conn_row">
+    <td>
+    {{ loop.index0 }}
+    </td>
+    
+    <td>
+    {{ aconn.type }}
+    </td>
+    <td>
+    {{ aconn.src_ip }}:{{ aconn.src_port }}
+    </td>
+    
+    <td>
+    {{ aconn.dest_ip }}:{{ aconn.dest_port }}
+    </td>
+    
+    <td>
+    {{ aconn.dframes }}
+    </td>
+    
+    <td>
+    {{ aconn.dbytes }}
+    </td>
+    
+    <td>
+    {{ aconn.uframes }}
+    </td>
+    
+    <td>
+    {{ aconn.ubytes }}
+    </td>
+    <!--
+    <td>
+    {{ aconn.tframes }}
+    </td>
+    
+    <td>
+    {{ aconn.tbytes }}
+    </td>
+    -->
+    <td>
+    {{ aconn.start }}
+    </td>
+    
+    <td>
+    {{ aconn.duration }}
+    </td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+<script type="text/javascript">
+
+$('.conn_row').on('click', function(e) {
+    
+    var row_id = $(this).attr('id'); // like "rindex123"
+    //console.debug(row_id);
+    e.stopPropagation();
+    var url = "/connection/{{uuid}}/";
+    //console.debug(url + row_id.substring(6));
+    window.location.href = url + row_id.substring(6);
+}
+)
+
+</script>           
+{% endif %}                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- bloc-2 END -->
+
+{% include "part_footer.html" %}
+
+</div>
+<!-- Main container END -->
+
+</body>
+</html>
